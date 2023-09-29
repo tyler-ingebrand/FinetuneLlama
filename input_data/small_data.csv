@@ -1,0 +1,185 @@
+qid,date,metadata,question,response_j,response_k
+0,2023/9/28,['manual'],"Define the steps of ""turn left at traffic light with left-turn light"":","Approach the traffic light and observe the left-turn light.
+If the left turn light is red, perform the action ""stop"".
+If the left turn light is green, perform the action ""look for pedestrian crossing"".
+If there is a left pedestrian or right pedestrian, perform the action ""stop"".
+If there is no pedestrian, perform the action ""look for car"".
+If there is an opposite car, a left car, or a right car, perform the action ""stop"".
+If there is no car, perform the action ""turn left"".
+If the left turn light is flashing yellow, perform the action ""stop"".
+If there is a stop sign, perform the action ""stop"".
+After performing the action ""stop"", wait until the left turn light is green to repeat steps 3-7.","Look for the left turn light color.
+If it is green, go straight, but if it is red or non-flashing yellow, stop and wait for it to turn green or flashing yellow.
+If it is flashing yellow, look for pedestrians crossing on the left side or cars on the opposite side and if there are any, wait for them to cross completely after which go straight."
+1,2023/9/28,['manual'],"Define the steps of ""turn left at traffic light with left-turn light"":","Check if the left turn light is green and ensure there are no pedestrians crossing or cars approaching from the opposite direction.
+If the light is green and the way is clear, begin to turn left.
+Complete the left turn, ensuring to stay in the correct lane and continue to observe for any unexpected obstacles or changes in the traffic light.","Approach the traffic light and observe the left-turn light.
+If the left turn light is red, perform the action ""stop"".
+If the left turn light is green, perform the action ""look for pedestrian crossing"".
+If there is a left pedestrian or right pedestrian, perform the action ""stop"".
+If there is no pedestrian, perform the action ""look for car"".
+If there is an opposite car, a left car, or a right car, perform the action ""stop"".
+If there is no car, perform the action ""turn left"".
+If the left turn light is flashing yellow, perform the action ""stop"".
+If there is a stop sign, perform the action ""stop"".
+After performing the action ""stop"", wait until the left turn light is green to repeat steps 3-7."
+2,2023/9/28,['manual'],"Define the steps of ""turn left at traffic light with left-turn light"":","Check if the left turn light is green and ensure there are no pedestrians crossing or cars approaching from the opposite direction.
+If the light is green and the way is clear, begin to turn left.
+Complete the left turn, ensuring to stay in the correct lane and continue to observe for any unexpected obstacles or changes in the traffic light.","Check if the left turn light is green or flashing yellow.
+Look for any oncoming cars from the opposite direction.
+Look for any pedestrians crossing from the left or right.
+If the road is clear and the left turn light is green or flashing yellow, prepare to turn left.
+Execute the left turn safely and smoothly."
+3,2023/9/28,['manual'],"Define the steps of ""turn left at traffic light with left-turn light"":","Check if the left turn light is green and ensure there are no pedestrians crossing or cars approaching from the opposite direction.
+If the light is green and the way is clear, begin to turn left.
+Complete the left turn, ensuring to stay in the correct lane and continue to observe for any unexpected obstacles or changes in the traffic light.","Look for the left turn light color.
+If it is green, go straight, but if it is red or non-flashing yellow, stop and wait for it to turn green or flashing yellow.
+If it is flashing yellow, look for pedestrians crossing on the left side or cars on the opposite side and if there are any, wait for them to cross completely after which go straight."
+4,2023/9/28,['manual'],"Define the steps of ""turn left at traffic light with left-turn light"":","Look for the left turn light color, if it's green proceed to next step, if it's red or flashing yellow, stop and wait for it to turn green.
+Look for pedestrians crossing from left or right, if there are any, wait for them to cross completely.
+Look for cars coming from the opposite direction or from the right, if there are any, wait for them to pass.
+Once the light is green, and there are no pedestrians or cars, turn left.","Approach the traffic light and observe the left-turn light.
+If the left turn light is red, perform the action ""stop"".
+If the left turn light is green, perform the action ""look for pedestrian crossing"".
+If there is a left pedestrian or right pedestrian, perform the action ""stop"".
+If there is no pedestrian, perform the action ""look for car"".
+If there is an opposite car, a left car, or a right car, perform the action ""stop"".
+If there is no car, perform the action ""turn left"".
+If the left turn light is flashing yellow, perform the action ""stop"".
+If there is a stop sign, perform the action ""stop"".
+After performing the action ""stop"", wait until the left turn light is green to repeat steps 3-7."
+5,2023/9/28,['manual'],"Define the steps of ""turn left at traffic light with left-turn light"":","Look for the left turn light color, if it's green proceed to next step, if it's red or flashing yellow, stop and wait for it to turn green.
+Look for pedestrians crossing from left or right, if there are any, wait for them to cross completely.
+Look for cars coming from the opposite direction or from the right, if there are any, wait for them to pass.
+Once the light is green, and there are no pedestrians or cars, turn left.","Check if the left turn light is green or flashing yellow.
+Look for any oncoming cars from the opposite direction.
+Look for any pedestrians crossing from the left or right.
+If the road is clear and the left turn light is green or flashing yellow, prepare to turn left.
+Execute the left turn safely and smoothly."
+6,2023/9/28,['manual'],"Define the steps of ""turn left at traffic light with left-turn light"":","Look for the left turn light color, if it's green proceed to next step, if it's red or flashing yellow, stop and wait for it to turn green.
+Look for pedestrians crossing from left or right, if there are any, wait for them to cross completely.
+Look for cars coming from the opposite direction or from the right, if there are any, wait for them to pass.
+Once the light is green, and there are no pedestrians or cars, turn left.","Look for the left turn light color.
+If it is green, go straight, but if it is red or non-flashing yellow, stop and wait for it to turn green or flashing yellow.
+If it is flashing yellow, look for pedestrians crossing on the left side or cars on the opposite side and if there are any, wait for them to cross completely after which go straight."
+7,2023/9/28,['manual'],"Define the steps of ""turn left at traffic light with left-turn light"":","Check if the left turn light is green or flashing yellow.
+Look for any oncoming cars from the opposite direction.
+Look for any pedestrians crossing from the left or right.
+If the road is clear and the left turn light is green or flashing yellow, prepare to turn left.
+Execute the left turn safely and smoothly.","Look for the left turn light color.
+If it is green, go straight, but if it is red or non-flashing yellow, stop and wait for it to turn green or flashing yellow.
+If it is flashing yellow, look for pedestrians crossing on the left side or cars on the opposite side and if there are any, wait for them to cross completely after which go straight."
+8,2023/9/28,['manual'],"Define the steps of ""turn right at traffic light"":","Approach the traffic light and slow down.
+Check the color of the traffic light.
+If the light is green, proceed to the next step. If the light is red or flashing yellow, stop and wait for it to turn green.
+Look for any cars coming from the opposite direction.
+If there are cars coming from the opposite direction, wait for them to pass.
+Look for any cars coming from the left or right.
+If there are cars coming from the left or right, wait for them to pass.
+Look for any pedestrians crossing from the left or right.
+If there are pedestrians crossing, wait for them to finish crossing.
+If there are no cars or pedestrians, turn right at the traffic light.","Look for pedestrian crossing and check if the left turn light is green.
+Look for car from the left and right.
+If there are no pedestrians or cars, proceed to turn right."
+9,2023/9/28,['manual'],"Define the steps of ""turn right at traffic light"":","Approach the traffic light and slow down.
+Check the color of the traffic light.
+If the light is green, proceed to the next step. If the light is red or flashing yellow, stop and wait for it to turn green.
+Look for any cars coming from the opposite direction.
+If there are cars coming from the opposite direction, wait for them to pass.
+Look for any cars coming from the left or right.
+If there are cars coming from the left or right, wait for them to pass.
+Look for any pedestrians crossing from the left or right.
+If there are pedestrians crossing, wait for them to finish crossing.
+If there are no cars or pedestrians, turn right at the traffic light.","Look for pedestrian crossing and check if the left turn light is green or flashing yellow.
+If there is no left pedestrian or right pedestrian, and the left turn light is green or flashing yellow, prepare to turn right.
+Look for car, specifically the left car and right car, to ensure the path is clear for turning right.
+If there is no opposite car, left car, or right car, proceed to turn right at the traffic light."
+10,2023/9/28,['manual'],"Define the steps of ""turn right at traffic light"":","Approach the traffic light and slow down.
+Check the color of the traffic light.
+If the light is green, proceed to the next step. If the light is red or flashing yellow, stop and wait for it to turn green.
+Look for any cars coming from the opposite direction.
+If there are cars coming from the opposite direction, wait for them to pass.
+Look for any cars coming from the left or right.
+If there are cars coming from the left or right, wait for them to pass.
+Look for any pedestrians crossing from the left or right.
+If there are pedestrians crossing, wait for them to finish crossing.
+If there are no cars or pedestrians, turn right at the traffic light.","Look for the right turn light to ensure it is green or flashing yellow.
+Look for any pedestrians crossing from the right side.
+Look for any cars coming from the left side.
+If there are no pedestrians or cars, proceed to turn right.
+If there are pedestrians or cars, wait until they have passed before turning right."
+11,2023/9/28,['manual'],"Define the steps of ""turn right at traffic light"":","Approach the traffic light and slow down.
+Check the color of the traffic light.
+If the light is green, proceed to the next step. If the light is red or flashing yellow, stop and wait for it to turn green.
+Look for any cars coming from the opposite direction.
+If there are cars coming from the opposite direction, wait for them to pass.
+Look for any cars coming from the left or right.
+If there are cars coming from the left or right, wait for them to pass.
+Look for any pedestrians crossing from the left or right.
+If there are pedestrians crossing, wait for them to finish crossing.
+If there are no cars or pedestrians, turn right at the traffic light.","Look for any car from the opposide side turning left and for pedestrians crossing on the right side.
+If there are any, then wait for them to cross fully, otherwise turn right."
+12,2023/9/28,['manual'],"Define the steps of ""turn right at traffic light"":","Look for pedestrian crossing and check if the left turn light is green or flashing yellow.
+If there is no left pedestrian or right pedestrian, and the left turn light is green or flashing yellow, prepare to turn right.
+Look for car, specifically the left car and right car, to ensure the path is clear for turning right.
+If there is no opposite car, left car, or right car, proceed to turn right at the traffic light.","Look for pedestrian crossing and check if the left turn light is green.
+Look for car from the left and right.
+If there are no pedestrians or cars, proceed to turn right."
+13,2023/9/28,['manual'],"Define the steps of ""turn right at traffic light"":","Look for pedestrian crossing and check if the left turn light is green or flashing yellow.
+If there is no left pedestrian or right pedestrian, and the left turn light is green or flashing yellow, prepare to turn right.
+Look for car, specifically the left car and right car, to ensure the path is clear for turning right.
+If there is no opposite car, left car, or right car, proceed to turn right at the traffic light.","Look for any car from the opposide side turning left and for pedestrians crossing on the right side.
+If there are any, then wait for them to cross fully, otherwise turn right."
+14,2023/9/28,['manual'],"Define the steps of ""turn right at traffic light"":","Look for the right turn light to ensure it is green or flashing yellow.
+Look for any pedestrians crossing from the right side.
+Look for any cars coming from the left side.
+If there are no pedestrians or cars, proceed to turn right.
+If there are pedestrians or cars, wait until they have passed before turning right.","Look for pedestrian crossing and check if the left turn light is green.
+Look for car from the left and right.
+If there are no pedestrians or cars, proceed to turn right."
+15,2023/9/28,['manual'],"Define the steps of ""turn right at traffic light"":","Look for the right turn light to ensure it is green or flashing yellow.
+Look for any pedestrians crossing from the right side.
+Look for any cars coming from the left side.
+If there are no pedestrians or cars, proceed to turn right.
+If there are pedestrians or cars, wait until they have passed before turning right.","Look for pedestrian crossing and check if the left turn light is green or flashing yellow.
+If there is no left pedestrian or right pedestrian, and the left turn light is green or flashing yellow, prepare to turn right.
+Look for car, specifically the left car and right car, to ensure the path is clear for turning right.
+If there is no opposite car, left car, or right car, proceed to turn right at the traffic light."
+16,2023/9/28,['manual'],"Define the steps of ""turn right at traffic light"":","Look for the right turn light to ensure it is green or flashing yellow.
+Look for any pedestrians crossing from the right side.
+Look for any cars coming from the left side.
+If there are no pedestrians or cars, proceed to turn right.
+If there are pedestrians or cars, wait until they have passed before turning right.","Look for any car from the opposide side turning left and for pedestrians crossing on the right side.
+If there are any, then wait for them to cross fully, otherwise turn right."
+17,2023/9/28,['manual'],"Define the steps of ""go straight at a two-way stop sign"":","If there is any car or pedestrian on the opposite side, stop until they fully cross.
+Look for cars crossing from left or right side and for pedestrian crossing on the opposite side.
+If there are no cars crossing from left or right side nor pedestrians crossing on the opposite side, then go straight.","Check if the left turn light is red.
+If the left turn light is green or flashing yellow, look for an opposite car.
+If there is an opposite car, wait for it to pass.
+Check for a left car and a right car.
+If there is a left or right car, wait for them to pass.
+Look for a left pedestrian, a right pedestrian, an opposite pedestrian, and a front pedestrian.
+If there is a pedestrian, wait for them to cross.
+If there is a two-way stop sign, stop and wait for your turn.
+When the way is clear, go straight."
+18,2023/9/28,['manual'],"Define the steps of ""go straight at a two-way stop sign"":","If there is any car or pedestrian on the opposite side, stop until they fully cross.
+Look for cars crossing from left or right side and for pedestrian crossing on the opposite side.
+If there are no cars crossing from left or right side nor pedestrians crossing on the opposite side, then go straight.","If the left turn light is green and there is no opposite car, go straight.
+If the left turn light is flashing yellow, look for car and if there is no car, go straight.
+If there is a stop sign, stop and look for pedestrian crossing, if there is no pedestrian, go straight."
+19,2023/9/28,['manual'],"Define the steps of ""go straight at a two-way stop sign"":","If there is any car or pedestrian on the opposite side, stop until they fully cross.
+Look for cars crossing from left or right side and for pedestrian crossing on the opposite side.
+If there are no cars crossing from left or right side nor pedestrians crossing on the opposite side, then go straight.","If the left turn light is green and there is no opposite car, go straight.
+If the left turn light is flashing yellow, look for car and if there is no car, go straight.
+If there is a stop sign, stop and look for pedestrian crossing, if there is no pedestrian, go straight.
+Look for the left turn light. If it is green or flashing yellow, you can proceed straight. If it is red, you must stop.
+Look for cars coming from the opposite direction. If there are any, wait for them to pass before you proceed straight.
+Look for pedestrians crossing from the left or right. If there are any, wait for them to cross before you proceed straight.
+If there is a stop sign, stop completely before proceeding straight. If there is no stop sign, and the road is clear, you can go straight."
+20,2023/9/28,['manual'],"Define the steps of ""go straight at a two-way stop sign"":","If there is any car or pedestrian on the opposite side, stop until they fully cross.
+Look for cars crossing from left or right side and for pedestrian crossing on the opposite side.
+If there are no cars crossing from left or right side nor pedestrians crossing on the opposite side, then go straight.","Look for car from opposite direction and on your right and left.
+Look for pedestrian crossing from left and right.
+Check if the left turn light is green or flashing yellow.
+If the left turn light is red or there is a stop sign, stop and wait.
+If there is no car, pedestrian, or stop sign, and the left turn light is not red, go straight."
