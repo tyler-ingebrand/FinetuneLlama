@@ -15,7 +15,7 @@ from trl.trainer import ConstantLengthDataset
 
 @dataclass
 class ScriptArguments:
-    model_name: Optional[str] = field(default="meta-llama/Llama-2-7b-hf", metadata={"help": "the model name"})
+    model_name: Optional[str] = field(default="meta-llama/Llama-2-13b-chat-hf", metadata={"help": "the model name"})
     log_with: Optional[str] = field(default="wandb", metadata={"help": "use 'wandb' to log with wandb"})
 
     dataset_name: Optional[str] = field(default="lvwerra/stack-exchange-paired", metadata={"help": "the dataset name"})
@@ -50,7 +50,7 @@ class ScriptArguments:
     weight_decay: Optional[float] = field(default=0.05, metadata={"help": "the weight decay"})
     optimizer_type: Optional[str] = field(default="paged_adamw_32bit", metadata={"help": "the optimizer type"})
 
-    output_dir: Optional[str] = field(default="./results", metadata={"help": "the output directory"})
+    output_dir: Optional[str] = field(default="sft", metadata={"help": "the output directory"})
     log_freq: Optional[int] = field(default=1, metadata={"help": "the logging frequency"})
 
 
@@ -160,7 +160,7 @@ bnb_config = BitsAndBytesConfig(
 base_model = AutoModelForCausalLM.from_pretrained(
     script_args.model_name,
     quantization_config=bnb_config,
-    device_map={"": 0},
+    device_map="auto", # automatically using accelerate to use multiple gpus because hf is awesome
     trust_remote_code=True,
     use_auth_token=True,
 )
@@ -201,6 +201,9 @@ training_args = TrainingArguments(
 
 train_dataset, eval_dataset = create_datasets(tokenizer, script_args)
 
+# note these are relative to available devices, so if only 5,6,7 are avaiable, then 5=0, 6=1, and 7=2
+print("\n\nModel layer locations:\n", base_model.hf_device_map, "\n\n")
+
 trainer = SFTTrainer(
     model=base_model,
     train_dataset=train_dataset,
@@ -218,11 +221,12 @@ output_dir = os.path.join(script_args.output_dir, "final_checkpoint")
 trainer.model.save_pretrained(output_dir)
 
 # Free memory for merging weights
-del base_model
-torch.cuda.empty_cache()
+# del base_model
+# torch.cuda.empty_cache()
 
-model = AutoPeftModelForCausalLM.from_pretrained(output_dir, device_map="auto", torch_dtype=torch.bfloat16)
-model = model.merge_and_unload()
+# model = AutoPeftModelForCausalLM.from_pretrained(output_dir, device_map="auto", torch_dtype=torch.bfloat16)
+# model = model.merge_and_unload()
 
-output_merged_dir = os.path.join(script_args.output_dir, "final_merged_checkpoint")
-model.save_pretrained(output_merged_dir, safe_serialization=True)
+# output_merged_dir = os.path.join(script_args.output_dir, "final_merged_checkpoint")
+# model.save_pretrained(output_merged_dir, safe_serialization=True)
+# No need to merge ATM

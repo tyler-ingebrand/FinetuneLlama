@@ -26,6 +26,9 @@ class ScriptArguments:
         default="../sft/results/final_checkpoint",
         metadata={"help": "the location of the SFT model name or path"},
     )
+    dataset_name: Optional[str] = field(default="lvwerra/stack-exchange-paired", metadata={"help": "the dataset name"})
+    file_path: Optional[str] = field(default=None, metadata={"help": "A local filepath if using a local dataset, else None"})
+
     learning_rate: Optional[float] = field(default=5e-4, metadata={"help": "optimizer learning rate"})
     lr_scheduler_type: Optional[str] = field(default="cosine", metadata={"help": "the lr scheduler type"})
     warmup_steps: Optional[int] = field(default=100, metadata={"help": "the number of warmup steps"})
@@ -52,7 +55,7 @@ class ScriptArguments:
     save_steps: Optional[int] = field(default=100, metadata={"help": "the saving frequency"})
     eval_steps: Optional[int] = field(default=100, metadata={"help": "the evaluation frequency"})
 
-    output_dir: Optional[str] = field(default="./results", metadata={"help": "the output directory"})
+    output_dir: Optional[str] = field(default="./dpo", metadata={"help": "the output directory"})
     log_freq: Optional[int] = field(default=1, metadata={"help": "the logging frequency"})
 
     # instrumentation
@@ -75,8 +78,8 @@ class ScriptArguments:
     )
 
 
-def get_stack_exchange_paired(
-    data_dir: str = "data/rl",
+def get_dataset(
+    args: ScriptArguments,
     sanity_check: bool = False,
     cache_dir: str = None,
     num_proc=24,
@@ -94,13 +97,21 @@ def get_stack_exchange_paired(
       "Question: " + <prompt> + "\n\nAnswer: "
     """
     dataset = load_dataset(
-        "lvwerra/stack-exchange-paired",
-        split="train",
+        args.dataset_name,
+        split="train",  
         cache_dir=cache_dir,
-        data_dir=data_dir,
+        data_files=args.file_path,
     )
+    # dataset = load_dataset(
+    #     args.dataset_name,
+    #     data_dir=args.subset,
+    #     data_files=args.file_path,
+    #     split=args.split,
+    #     use_auth_token=True,
+    #     num_proc=args.num_workers if not args.streaming else None,
+    #     streaming=args.streaming,
+    # )
     original_columns = dataset.column_names
-    dataset = dataset.select(range(min(len(dataset), 500)))
 
     if sanity_check:
         dataset = dataset.select(range(min(len(dataset), 1000)))
@@ -130,8 +141,12 @@ if __name__ == "__main__":
         low_cpu_mem_usage=True,
         torch_dtype=torch.float16,
         load_in_4bit=True,
+        # device_map="auto"
     )
     model.config.use_cache = False
+    # note these are relative to available devices, so if only 5,6,7 are avaiable, then 5=0, 6=1, and 7=2
+    print("\n\nModel layer locations:\n", model.hf_device_map, "\n\n")
+
 
     if script_args.ignore_bias_buffers:
         # torch distributed hack
@@ -144,25 +159,33 @@ if __name__ == "__main__":
         low_cpu_mem_usage=True,
         torch_dtype=torch.float16,
         load_in_4bit=True,
+        # device_map="auto",
+
     )
+    print(model_ref.hf_device_map, "\n\n")
+
+
     tokenizer = AutoTokenizer.from_pretrained("meta-llama/Llama-2-7b-hf")
     tokenizer.pad_token = tokenizer.eos_token
+    tokenizer.padding_side = "right"  # Fix weird overflow issue with fp16 training # TODO this is probabily needed?
 
     # 2. Load the Stack-exchange paired dataset
-    train_dataset = get_stack_exchange_paired(data_dir="data/rl", sanity_check=script_args.sanity_check)
-    print(train_dataset, len(train_dataset))
-    train_dataset = train_dataset.filter(
-        lambda x: len(x["prompt"]) + len(x["chosen"]) <= script_args.max_length
-        and len(x["prompt"]) + len(x["rejected"]) <= script_args.max_length
-    )
+    train_dataset = get_dataset(script_args, sanity_check=script_args.sanity_check)
+
+    # no need to filter since we are curating dataset
+    # train_dataset = train_dataset.filter(
+    #     lambda x: len(x["prompt"]) + len(x["chosen"]) <= script_args.max_length
+    #     and len(x["prompt"]) + len(x["rejected"]) <= script_args.max_length
+    # )
 
     # 3. Load evaluation dataset
-    eval_dataset = get_stack_exchange_paired(data_dir="data/evaluation", sanity_check=True)
-    eval_dataset = eval_dataset.filter(
-        lambda x: len(x["prompt"]) + len(x["chosen"]) <= script_args.max_length
-        and len(x["prompt"]) + len(x["rejected"]) <= script_args.max_length
-    )
-    print(train_dataset, len(train_dataset))
+    eval_dataset = get_dataset(script_args, sanity_check=script_args.sanity_check)
+    # no need to filter since we are curating dataset
+    # eval_dataset = eval_dataset.filter(
+    #     lambda x: len(x["prompt"]) + len(x["chosen"]) <= script_args.max_length
+    #     and len(x["prompt"]) + len(x["rejected"]) <= script_args.max_length
+    # )
+
     # train_dataset = train_dataset.shuffle(buffer_size=200)
 
 
