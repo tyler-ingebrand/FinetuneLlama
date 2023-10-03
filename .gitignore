@@ -3,3 +3,6 @@ sft/
 wandb/
 venv/
 dpo/
+.vscode/
+__pycache__/
+
