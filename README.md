@@ -1,4 +1,6 @@
-# DPO pipeline for the creation of StackLlaMa 2: a Stack exchange llama-v2-7b model
+# DPO pipeline for finetuning LlaMa 2
+
+Special thanks to Hugging face for helpful code and examples. See [here](https://github.com/huggingface/trl/tree/main/examples/research_projects/stack_llama_2/scripts) and [here](https://huggingface.co/blog/dpo-trl). 
 
 ## Prerequisites
 
@@ -15,37 +17,9 @@ $ accelerate config
 
 ## Training
 
-There were two main steps to the DPO training process:
-1. Supervised fine-tuning of the base llama-v2-7b model to create llama-v2-7b-se:
-    - `accelerate launch examples/stack_llama_2/scripts/sft_llama2.py --output_dir="sft"`
-1. Run the DPO trainer using the model saved by the previous step:
-    - `accelerate launch examples/stack_llama_2/scripts/dpo_llama2.py --model_name_or_path="sft/final_checkpoint" --output_dir="dpo"`
+There were three main steps to the experiment:
+1. Supervised fine-tuning of the base llama-v2 model. See pre_training_script.py. This makes the language model "on-policy".
+2. DPO fine-tuning. See training_script.py. This finetunes the model to align with the provided preferences.
+3. Testing. See either testing_script.py to run one question through the model, or checkpoints_to_csv.py to run many questions through many models.
 
-
-## Merging the adaptors
-
-To merge the adaptors into the base model we can use the `merge_peft_adapter.py` helper script that comes with TRL:
-
-```
-python trl/examples/research_projects/stack_llama/scripts/merge_peft_adapter.py --base_model_name="meta-llama/Llama-2-7b-hf" --adapter_model_name="dpo/final_checkpoint/" --output_name="stack-llama-2"
-```
-
-which will also push the model to your HuggingFace hub account.
-
-## Running the model
-
-We can load the DPO-trained LoRA adaptors which were saved by the DPO training step and load them via:
-
-```py
-from peft import AutoPeftModelForCausalLM
-
-
-model = AutoPeftModelForCausalLM.from_pretrained(
-    "dpo/final_checkpoint",
-    low_cpu_mem_usage=True,
-    torch_dtype=torch.float16,
-    load_in_4bit=True,
-)
-
-model.generate(...)
-```
+See **commands.txt** for the command line arguments used for these experiments. 
