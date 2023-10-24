@@ -1,0 +1,13 @@
+#!/bin/bash
+
+CUDA_VISIBLE_DEVICES=1,2,3 python pre_training_script.py --subset None --dataset_name "csv" --file_path "input_data/med_data.csv" --max_steps 200 --save_steps 20 --logging_steps 1 --log_freq 1 --size_valid_set 200 --shuffle_buffer 200 --seed 1
+CUDA_VISIBLE_DEVICES=1,2,3 python pre_training_script.py --subset None --dataset_name "csv" --file_path "input_data/med_data.csv" --max_steps 200 --save_steps 20 --logging_steps 1 --log_freq 1 --size_valid_set 200 --shuffle_buffer 200 --seed 2
+CUDA_VISIBLE_DEVICES=1,2,3 python pre_training_script.py --subset None --dataset_name "csv" --file_path "input_data/med_data.csv" --max_steps 200 --save_steps 20 --logging_steps 1 --log_freq 1 --size_valid_set 200 --shuffle_buffer 200 --seed 3
+CUDA_VISIBLE_DEVICES=1,2,3 python pre_training_script.py --subset None --dataset_name "csv" --file_path "input_data/med_data.csv" --max_steps 200 --save_steps 20 --logging_steps 1 --log_freq 1 --size_valid_set 200 --shuffle_buffer 200 --seed 4
+CUDA_VISIBLE_DEVICES=1,2,3 python pre_training_script.py --subset None --dataset_name "csv" --file_path "input_data/med_data.csv" --max_steps 200 --save_steps 20 --logging_steps 1 --log_freq 1 --size_valid_set 200 --shuffle_buffer 200 --seed 5
+
+CUDA_VISIBLE_DEVICES=1,2,3 python training_script.py --model_name_or_path sft_1/final_checkpoint/ --dataset_name "csv" --file_path "input_data/med_data.csv" --per_device_train_batch_size 1 --gradient_accumulation_steps 16 --max_steps 200 --save_steps 20 --logging_steps 1 --output_dir ./dpo_1
+CUDA_VISIBLE_DEVICES=1,2,3 python training_script.py --model_name_or_path sft_2/final_checkpoint/ --dataset_name "csv" --file_path "input_data/med_data.csv" --per_device_train_batch_size 1 --gradient_accumulation_steps 16 --max_steps 200 --save_steps 20 --logging_steps 1 --output_dir ./dpo_2
+CUDA_VISIBLE_DEVICES=1,2,3 python training_script.py --model_name_or_path sft_3/final_checkpoint/ --dataset_name "csv" --file_path "input_data/med_data.csv" --per_device_train_batch_size 1 --gradient_accumulation_steps 16 --max_steps 200 --save_steps 20 --logging_steps 1 --output_dir ./dpo_3
+CUDA_VISIBLE_DEVICES=1,2,3 python training_script.py --model_name_or_path sft_4/final_checkpoint/ --dataset_name "csv" --file_path "input_data/med_data.csv" --per_device_train_batch_size 1 --gradient_accumulation_steps 16 --max_steps 200 --save_steps 20 --logging_steps 1 --output_dir ./dpo_4
+CUDA_VISIBLE_DEVICES=1,2,3 python training_script.py --model_name_or_path sft_5/final_checkpoint/ --dataset_name "csv" --file_path "input_data/med_data.csv" --per_device_train_batch_size 1 --gradient_accumulation_steps 16 --max_steps 200 --save_steps 20 --logging_steps 1 --output_dir ./dpo_5

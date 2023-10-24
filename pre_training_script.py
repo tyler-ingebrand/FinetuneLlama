@@ -52,10 +52,12 @@ class ScriptArguments:
 
     output_dir: Optional[str] = field(default="sft", metadata={"help": "the output directory"})
     log_freq: Optional[int] = field(default=1, metadata={"help": "the logging frequency"})
+    seed: Optional[int] = field(default=1, metadata={"help": "The seed to use for shuffling."})
 
 
 parser = HfArgumentParser(ScriptArguments)
 script_args = parser.parse_args_into_dataclasses()[0]
+script_args.output_dir = script_args.output_dir + f"_{script_args.seed}"
 
 if script_args.subset == "None":
     script_args.subset = None
@@ -101,9 +103,22 @@ def print_trainable_parameters(model):
 
 def prepare_sample_text(example):
     """Prepare the text from a sample of the dataset."""
-    text = f"Question: {example['question']}\n\nAnswer: {example['response_j']}"
+    # text = f"Question: {example['question']}\n\nAnswer: {example['response_j']}"
+    text = f"""<s>[INST] <<SYS>>
+You are a helpful assistant. Always answer as helpfully as possible, while being safe.  Your answers should be detailed.
+<</SYS>>
+
+{example['question']}: [/INST]
+{example['response_j']}
+"""
     return text
 
+#     question = """<s>[INST] <<SYS>>
+# You are a helpful assistant. Always answer as helpfully as possible, while being safe.  Your answers should be detailed.
+# <</SYS>>
+
+# Define 3 steps of "turn left at traffic light with left-turn light": [/INST]
+# """
 
 def create_datasets(tokenizer, args):
     assert args.subset is None or args.file_path is None, 'Either the subset arg should be None or the file_path. If using a hugging face dataset, file_path is none and subset is based on the data. If using a local file, subset is none and file_path is a str. '
@@ -121,7 +136,7 @@ def create_datasets(tokenizer, args):
         print("Loading the dataset in streaming mode")
         valid_data = dataset.take(args.size_valid_set)
         train_data = dataset.skip(args.size_valid_set)
-        train_data = train_data.shuffle(buffer_size=args.shuffle_buffer, seed=None)
+        train_data = train_data.shuffle(buffer_size=args.shuffle_buffer, seed=args.seed)
 
     else:
         dataset = dataset.train_test_split(test_size=0.005, seed=None)
@@ -139,6 +154,7 @@ def create_datasets(tokenizer, args):
         infinite=True,
         seq_length=args.seq_length,
         chars_per_token=chars_per_token,
+        shuffle=False,
     )
     valid_dataset = ConstantLengthDataset(
         tokenizer,
@@ -147,6 +163,7 @@ def create_datasets(tokenizer, args):
         infinite=False,
         seq_length=args.seq_length,
         chars_per_token=chars_per_token,
+        shuffle=False,
     )
     return train_dataset, valid_dataset
 

@@ -1,8 +1,21 @@
 results/
-sft/
 wandb/
 venv/
-dpo/
 .vscode/
 __pycache__/
 
+
+
+sft/
+sft_1/
+sft_2/
+sft_3/
+sft_4/
+sft_5/
+
+dpo/
+dpo_1/
+dpo_2/
+dpo_3/
+dpo_4/
+dpo_5/

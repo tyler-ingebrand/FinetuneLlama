@@ -117,8 +117,15 @@ def get_dataset(
         dataset = dataset.select(range(min(len(dataset), 1000)))
 
     def return_prompt_and_responses(samples) -> Dict[str, str]:
+        format_str = """<s>[INST] <<SYS>>
+You are a helpful assistant. Always answer as helpfully as possible, while being safe.  Your answers should be detailed.
+<</SYS>>
+
+{question}: [/INST]
+"""
+        
         return {
-            "prompt": ["Question: " + question + "\n\nAnswer: " for question in samples["question"]],
+            "prompt": [format_str.format(question=question) for question in samples["question"]],
             "chosen": samples["response_j"],
             "rejected": samples["response_k"],
         }

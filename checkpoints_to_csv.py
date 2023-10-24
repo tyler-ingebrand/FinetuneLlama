@@ -5,6 +5,7 @@ import os
 from dataclasses import dataclass, field
 from typing import Optional
 from transformers import HfArgumentParser
+from tqdm import trange, tqdm
 
 @dataclass
 class ScriptArguments:
@@ -42,17 +43,27 @@ if __name__ == "__main__":
 
     # create list of all models
     base_model = script_args.model_name
-    base_dirs = ["sft", "dpo"]
-    checkpoints = ["checkpoint-100", "checkpoint-200", "checkpoint-300", "checkpoint-400", "checkpoint-500"]
-    
     all_models = [{'model_name':base_model, 'model_name_or_path':None}] # untrained
+    
+    # add sfts
+    base_dirs = ["sft_1", "sft_2","sft_3","sft_4","sft_5",]
+    checkpoints = ["final_checkpoint"]
     for base_dir in base_dirs:
         for checkpoint in checkpoints:
             all_models.append({'model_name':base_model, 'model_name_or_path':f"{base_dir}/{checkpoint}"})
 
+    # add dpos
+    base_dirs = ["dpo_1", "dpo_2","dpo_3","dpo_4","dpo_5",]
+    checkpoints = ["checkpoint-20", "checkpoint-40", "checkpoint-60", "checkpoint-80", "checkpoint-100", 
+                   "checkpoint-120", "checkpoint-140", "checkpoint-160", "checkpoint-180", "checkpoint-200",]
+    for base_dir in base_dirs:
+        for checkpoint in checkpoints:
+            all_models.append({'model_name':base_model, 'model_name_or_path':f"{base_dir}/{checkpoint}"})
+
+
     # create new csv file
     model_and_answer_pairs = {}
-    for model_settings in all_models:
+    for model_settings in tqdm(all_models):
         model_name = model_settings['model_name']
         model_name_or_path = model_settings['model_name_or_path']
 

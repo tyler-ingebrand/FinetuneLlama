@@ -1,13 +1,13 @@
 # note CUDA_VISIBLE_DEVICES sets which of the GPUs it is allowed to use. Given the GPUs, it automatically selects them.
 
 # supervised pretraining 
-CUDA_VISIBLE_DEVICES=5,6,7 python pre_training_script.py --subset None --dataset_name "csv" --file_path "input_data/small_data.csv" --max_steps 50 --logging_steps 1 --log_freq 1 --size_valid_set 1 --shuffle_buffer 5
+CUDA_VISIBLE_DEVICES=1,2,3 python pre_training_script.py --subset None --dataset_name "csv" --file_path "input_data/med_data.csv" --max_steps 200 --save_steps 20 --logging_steps 1 --log_freq 1 --size_valid_set 200 --shuffle_buffer 200 --seed 1
 
 # DPO training
-CUDA_VISIBLE_DEVICES=5,6,7 python training_script.py --model_name_or_path sft/final_checkpoint/ --dataset_name "csv" --file_path "input_data/small_data.csv" --per_device_train_batch_size 1 --gradient_accumulation_steps 16 --max_steps 50 --logging_steps 1
+CUDA_VISIBLE_DEVICES=1,2,3 python training_script.py --model_name_or_path sft/final_checkpoint/ --dataset_name "csv" --file_path "input_data/med_data.csv" --per_device_train_batch_size 1 --gradient_accumulation_steps 16 --max_steps 200 --save_steps 20 --logging_steps 1 --output_dir ./dpo_1
 
 # testing
 CUDA_VISIBLE_DEVICES=5,6,7 python testing_script.py --model_name_or_path "dpo/final_checkpoint/"
 
 # writing all checkpoint outputs to csv
-CUDA_VISIBLE_DEVICES=5,6,7 python checkpoints_to_csv.py --question_file input_data/questions.csv
+CUDA_VISIBLE_DEVICES=1,2,3 python checkpoints_to_csv.py --question_file input_data/med_questions.csv
